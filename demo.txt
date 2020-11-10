@@ -1,0 +1,7 @@
+<style jsx>{`
+    h1 {
+        color: blue;
+    }
+`}</style>
+
+<VSvg icon='asdf' width='' height='' color=''></VSvg>

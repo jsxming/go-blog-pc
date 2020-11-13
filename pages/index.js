@@ -2,7 +2,6 @@ import "./index.less";
 import API from "@/api/index";
 import LayoutDefault from "@/layout/default";
 import Link from 'next/link';
-import { Button } from "antd";
 
 
 // getStaticProps
@@ -19,6 +18,7 @@ export async function getServerSideProps() {
 function ArticleItem({ title, description, id }) {
     return (
         <Link href={'/article/' + id}>
+
             <div className='art'>
                 <p className='tit'>{title}</p>
                 <p>{description}</p>
@@ -49,6 +49,7 @@ function Home({ res }) {
 
     return (
         <LayoutDefault>
+
             <div>
                 {
                     list.map(item => {

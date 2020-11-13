@@ -7,7 +7,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware')
 const devProxy = {
     '/api': {
         // target: 'http://yapi.baidu.com/mock/6943/website', // 端口自己配置合适的
-        target: 'http://localhost:9620', // 端口自己配置合适的
+        target: 'http://localhost:9620/api', // 端口自己配置合适的
         pathRewrite: {
             '^/api': '/'
         },

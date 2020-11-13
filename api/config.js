@@ -47,6 +47,7 @@ $http.interceptors.request.use(
 // 添加响应拦截器
 $http.interceptors.response.use(
     (response) => {
+        console.log(response.data);
         return response.data;
     },
     (error) => {

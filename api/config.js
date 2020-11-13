@@ -21,7 +21,7 @@ function deleteInvalidParams(params) {
 
 
 const $http = axios.create({
-    baseURL: process.env.NODE_ENV === "development" ? "http://localhost:9620/api" : 'https://www.jsxming.cn/blog',
+    baseURL: process.env.NODE_ENV === "development" ? "http://localhost:9620/blog" : 'https://www.jsxming.cn/blog',
     timeout: 15000,
     headers: {
         'Content-Type': 'application/json;charset=UTF-8',

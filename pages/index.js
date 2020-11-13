@@ -18,7 +18,7 @@ export async function getServerSideProps() {
 
 function ArticleItem({ title, description, id }) {
     return (
-        <Link href={'/article/detail/' + id}>
+        <Link href={'/article/' + id}>
             <div className='art'>
                 <p className='tit'>{title}</p>
                 <p>{description}</p>

@@ -21,8 +21,8 @@ export default function ArtDetail({ article }) {
         <LayoutDefault>
             <Head>
                 <title>{article.title}</title>
-                <meta name='keywords' content='' ></meta>
-                <meta name='description' content='' ></meta>
+                <meta name='keywords' content={article.title} ></meta>
+                <meta name='description' content={article.title} ></meta>
             </Head>
             <div>
                 <h1 className='text_center'>{article.title}</h1>

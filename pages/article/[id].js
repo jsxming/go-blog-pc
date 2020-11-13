@@ -1,5 +1,7 @@
 import LayoutDefault from "@/layout/default";
 import API from "@/api/index";
+import 'braft-editor/dist/index.css';
+
 
 export async function getServerSideProps({ query }) {
     let { id } = query;
@@ -13,12 +15,11 @@ export async function getServerSideProps({ query }) {
 }
 
 export default function ArtDetail({ article }) {
-    console.log(article);
     return (
         <LayoutDefault>
             <div>
                 <h1 className='text_center'>{article.title}</h1>
-                <div className='cont' dangerouslySetInnerHTML={{ __html: article.content }}></div>
+                <div className='cont bf-container' dangerouslySetInnerHTML={{ __html: article.content }}></div>
 
                 <style>{`
     

@@ -49,7 +49,6 @@ function Home({ res }) {
 
     return (
         <LayoutDefault>
-
             <div>
                 {
                     list.map(item => {

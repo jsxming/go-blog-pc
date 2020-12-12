@@ -1,165 +1,17 @@
 .home {
-    width: 1160px;
-    margin: 0 auto;
-
-    .carousel {
-        height: 360px;
-        background-color: #AD66FE;
-        position: relative;
-        border-radius: 6px;
-
-        &:hover {
-
-            .pre,
-            .next {
-                visibility: initial;
-            }
-        }
-
-        .slick-dots {
-            display: none !important;
-        }
-
-        .pre,
-        .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            visibility: hidden;
-        }
-
-        .pre {
-            left: 25px;
-        }
-
-        .next {
-            right: 25px;
-        }
-    }
-
-    .title {
-        font-size: 22px;
-        margin: 40px 0 38px;
-
-        .c_999 {
-            font-size: 14px;
-            margin-right: 4px;
-        }
-
-        img {
-            margin-right: 12px;
-        }
-    }
-
-
-    .live_item {
-        width: 372px;
-        height: 145px;
-        margin-right: 22px;
-        background: #FFFFFF;
-        border: 1px solid #EEEEEE;
-        transition: all .25s;
-        padding: 0 31px;
-        box-sizing: border-box;
-
-        &:hover {
+    .art{
+        display: block;
+        cursor:pointer;
+        border-radius:8px;
+        border:1px solid #eeeeee;
+        padding:30px 15px;
+        margin:15px;
+        transition:all .25s linear;
+        &:hover{
             box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.08);
         }
-
-        &:nth-child(3n) {
-            margin-right: 0;
+        .tit{
+            font-size:20px;
         }
-
-        .teacher_logo {
-            height: 80px;
-            width: 80px;
-            border-radius: 50%;
-            margin-right: 20px;
-        }
-
-        .tit {
-            font-size: 18px;
-            width: 213px;
-        }
-
-        .c_999 {
-            margin: 8px 0;
-            color: #999;
-        }
-    }
-
-
-    .system_lesson {
-        width: 372px;
-        margin-right: 22px;
-        margin-bottom: 30px;
-
-        &:nth-child(3n) {
-            margin-right: 0;
-        }
-
-        .img_top {
-
-            img {
-                border-top-right-radius: 12px;
-                border-top-left-radius: 12px;
-
-                height: 279px;
-                width: 100%;
-            }
-        }
-
-        .footer {
-            padding: 0 20px;
-            height: 142px;
-            box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.08);
-
-            .tit {
-                padding: 18px 0 7px;
-                font-size: 18px;
-            }
-
-            .c_999 {
-                margin-bottom: 15px;
-            }
-
-            .teacher_item {
-                margin-right: 36px;
-            }
-
-            .teacher_png {
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                margin-right: 8px;
-            }
-
-            .c_yello {
-                font-size: 16px;
-            }
-        }
-    }
-}
-
-.home_footer {
-    background: url(/img/h_foot.png) no-repeat;
-    background-size: cover;
-    height: 220px;
-    flex-direction: column;
-    margin-top: 160px;
-
-    .foot_tit {
-        font-size: 22px;
-        letter-spacing: 20px;
-        color: #000000;
-        line-height: 30px;
-    }
-
-    .btn_tel {
-        display: block;
-        width: 320px;
-        height: 60px;
-        margin-top: 25px;
-        border-radius: 30px;
     }
 }

@@ -1,7 +1,7 @@
 import LayoutDefault from "@/layout/default";
 import API from "@/api/index";
 import Head from 'next/head';
-
+import "./index.less"
 
 export async function getServerSideProps({ query }) {
     let { id } = query;
@@ -21,21 +21,12 @@ export default function ArtDetail({ article }) {
         <LayoutDefault>
             <Head>
                 <title>{article.title}</title>
-                <meta name='keywords' content={article.title} ></meta>
-                <meta name='description' content={article.title} ></meta>
+                {/* <meta name='keywords' content={article.title} ></meta>
+                <meta name='description' content={article.title} ></meta> */}
             </Head>
-            <div>
+            <div className='article_box'>
                 <h1 className='text_center'>{article.title}</h1>
-                <div className='cont bf-container' dangerouslySetInnerHTML={{ __html: article.content }}></div>
-
-                <style>
-                    {`
-    
-        .cont{
-            margin:15px;
-            padding:15px;
-        }
-    `}</style>
+                <div className='cont' dangerouslySetInnerHTML={{ __html: article.content }}></div>
             </div>
         </LayoutDefault>
     )

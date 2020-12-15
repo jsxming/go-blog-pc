@@ -30,9 +30,14 @@ app.prepare().then(() => {
             server.use(createProxyMiddleware(context, devProxy[context]))
         })
     }
+
     server.all('*', (req, res) => {
         handle(req, res)
     })
+
+    
+
+    
     server.listen(port, err => {
         if (err) {
             throw err

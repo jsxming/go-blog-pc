@@ -6,6 +6,22 @@ export function setServerToken(token) {
     serverToken = token
 }
 
+let httpResponse;
+
+export function setRedirect(val){
+    httpResponse =val
+}
+
+
+
+let url;
+
+export function setUrl(val){
+    url =val
+}
+
+
+
 // 删除请求参数中无效的参数
 function deleteInvalidParams(params) {
     for (const key in params) {
@@ -47,7 +63,11 @@ $http.interceptors.request.use(
 // 添加响应拦截器
 $http.interceptors.response.use(
     (response) => {
-        console.log(response.data);
+        let code = response.data.code;
+        if(code===401 || code===4010){
+            httpResponse.redirect('/');
+            httpResponse.end()
+        }
         return response.data;
     },
     (error) => {

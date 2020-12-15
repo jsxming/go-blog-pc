@@ -9,6 +9,7 @@ import { setToken, setUser } from '@/redux/actions';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN'
 import API from '@/api/index';
+import {setRedirect} from '@/api/config';
 import { setServerToken } from '@/api/config';
 
 //页面切换 跳转到顶部
@@ -34,6 +35,10 @@ function App({ Component, pageProps, token, userInfo }) {
 
 
 App.getInitialProps = async ({ ctx }) => {
+  console.log("App.getInitialProps");
+    if(!process.browser){
+      setRedirect(ctx.res)
+    }
   // let token = '',
   //   userInfo = {};
   // if (ctx && ctx.req) {

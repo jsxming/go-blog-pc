@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "dev": "node server.js",
+        "dev": "node server.js -p 9621",
         "build": "next build",
         "export": "next export",
         "start": "next start -p 9621"

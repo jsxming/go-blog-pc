@@ -2,11 +2,17 @@ import "./index.less";
 import API from "@/api/index";
 import LayoutDefault from "@/layout/default";
 import Link from 'next/link';
+import {Store} from '@/redux/store';
+import {setTypes} from '@/redux/action';
 
 
 // getStaticProps
 export async function getServerSideProps() {
     let res = await API.queryArticles()
+    let typeList = await API.queryTypes()
+
+    // Store.dispatch(setTypes(typeList))
+    // console.log(Store);
     return {
         props: {
             res

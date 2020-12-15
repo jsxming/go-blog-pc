@@ -6,6 +6,8 @@ import rootReducer from './reducer/reducer'
 import rootSaga from './saga/saga'
 import { isDev } from '@/config/index';
 
+
+
 const bindMiddleware = (middleware) => {
   if (isDev) {
     const { composeWithDevTools } = require('redux-devtools-extension')
@@ -14,13 +16,16 @@ const bindMiddleware = (middleware) => {
   return applyMiddleware(...middleware)
 }
 
-export const Store = (context) => {
+export let Store;
+
+export const initStore = (context) => {
   const sagaMiddleware = createSagaMiddleware()
   const store = createStore(rootReducer, bindMiddleware([sagaMiddleware]))
 
   store.sagaTask = sagaMiddleware.run(rootSaga)
-
+  Store = store;
   return store
 }
 
-export const wrapper = createWrapper(Store, { debug: isDev })
+// export const wrapper = createWrapper(initStore, { debug: isDev })
+export const wrapper = createWrapper(initStore, { debug: false })

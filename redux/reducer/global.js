@@ -15,6 +15,7 @@ export function token(state = '', action) {
     }
 }
 
+
 export function user(state = {}, action) {
     const { type, payload } = action;
     switch (type) {
@@ -26,10 +27,21 @@ export function user(state = {}, action) {
 }
 
 
+export function types(state=[],action){
+    const { type, payload } = action;
+    switch (type) {
+        case actionTypes.SET_TYPES:
+            return { ...state, ...payload };
+        default:
+            return state;
+    }
+}
+
 
 
 
 export default {
     token,
     user,
+    types
 }

@@ -11,4 +11,5 @@ export default {
     // test: 'GET /t/test',
     queryArticles: "GET /t/articles",
     queryArticle: "GET /t/article",
+    queryTypes:'GET /t/types'
 };

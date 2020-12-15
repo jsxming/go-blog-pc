@@ -6,7 +6,6 @@ import "./index.less"
 export async function getServerSideProps({ query }) {
     let { id } = query;
     let res = await API.queryArticle({ id })
-    console.log(res);
     return {
         props: {
             article: res

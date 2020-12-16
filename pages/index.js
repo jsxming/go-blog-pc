@@ -2,23 +2,23 @@ import "./index.less";
 import API from "@/api/index";
 import LayoutDefault from "@/layout/default";
 import Link from 'next/link';
-import {Store} from '@/redux/store';
-import {setTypes} from '@/redux/action';
+import {wrapper} from '@/redux/store';
+import {setTypes} from '@/redux/actions';
+import { useSelector } from "react-redux";
 
-
-// getStaticProps
-export async function getServerSideProps() {
+export const getServerSideProps = wrapper.getServerSideProps(async ({store}) => {
     let res = await API.queryArticles()
     let typeList = await API.queryTypes()
+    store.dispatch(setTypes(typeList))
 
-    // Store.dispatch(setTypes(typeList))
-    // console.log(Store);
     return {
-        props: {
+        props:{
             res
-        },
-    };
-}
+        }
+    }
+})
+
+
 
 
 function ArticleItem({ title, description, id }) {
@@ -33,8 +33,10 @@ function ArticleItem({ title, description, id }) {
 }
 
 
-function Home({ res }) {
+function Home({ res={} }) {
     let list = res.list || [];
+    let types = useSelector(state=>state.types)
+    console.log(types);
 
     return (
         <LayoutDefault>

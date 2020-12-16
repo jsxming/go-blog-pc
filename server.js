@@ -16,7 +16,7 @@ const devProxy = {
 }
 
 
-const port = 9621
+const port = 3333
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({
     dev

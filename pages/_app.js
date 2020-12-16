@@ -1,61 +1,50 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Provider } from 'react-redux'
+import { useStore } from '@/redux/store'
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/lib/locale/zh_CN'
+import { persistStore } from 'redux-persist'
+import { PersistGate } from 'redux-persist/integration/react'
+
+import {setRedirect} from '@/api/config';
+
 import '@/styles/antd.reset.less';
 import '@/styles/reset.less'
 import './../styles/globals.less'
-import { parseCookies } from '../util/index';
-import { wrapper } from '@/redux/store'
-import { useDispatch } from 'react-redux';
-import { setToken, setUser } from '@/redux/actions';
-import { ConfigProvider } from 'antd';
-import zhCN from 'antd/lib/locale/zh_CN'
-import API from '@/api/index';
-import {setRedirect} from '@/api/config';
-import { setServerToken } from '@/api/config';
 
-//页面切换 跳转到顶部
-function scrollTop() {
-  document.body.scrollTo(0, 0)
-}
 
-function App({ Component, pageProps, token, userInfo }) {
-  // let dispatch = useDispatch()
-  // if (token) {
-  //   dispatch(setToken(token))
-  //   dispatch(setUser(userInfo))
-  // }
+function App({ Component, pageProps }) {
+  const store = useStore(pageProps.initialState)
+  const persistor = persistStore(store, {}, function () {
+    persistor.persist()
+  })
+  
 
-  // useEffect(() => {
-  //   scrollTop()
-  // })
-
-  return <ConfigProvider locale={zhCN}>
-    <Component {...pageProps} />
+  return (
+    <ConfigProvider locale={zhCN}>
+      <Provider store={store}>
+        <PersistGate  persistor={persistor}>
+          <Component {...pageProps} />
+        </PersistGate>
+      </Provider>
   </ConfigProvider>
+  )
 }
 
 
 App.getInitialProps = async ({ ctx }) => {
-  console.log("App.getInitialProps");
-    if(!process.browser){
-      setRedirect(ctx.res)
-    }
-  // let token = '',
-  //   userInfo = {};
-  // if (ctx && ctx.req) {
-  //   let cookieObj = parseCookies(ctx.req.headers.cookie || "")
-  //   token = cookieObj.token || ''
-  //   if (token !== '') {
-  //     setServerToken(token)
-  //     userInfo = await API.queryUser()
-  //   }
-  // }
-
+  if(!process.browser){
+    setRedirect(ctx.res)
+  }
   return {
-    // token,
-    // userInfo
+    props:{}
   }
 }
 
 
-export default wrapper.withRedux(App)
+
+
+
+// export default wrapper.withRedux(App)
+export default App
 

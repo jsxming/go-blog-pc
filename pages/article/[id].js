@@ -15,6 +15,8 @@ export async function getServerSideProps({ query }) {
 
 
 
+
+
 export default function ArtDetail({ article }) {
     return (
         <LayoutDefault>

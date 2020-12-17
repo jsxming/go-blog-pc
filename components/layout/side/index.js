@@ -29,7 +29,7 @@ export default function SiderLeft() {
               <Avatar className='u_avatar' size={120} src='/img/dlam.jpg' />
               <h4 className='u_name' >小明同学丶</h4>
               <div className='tags flex_center flex_wrap'>
-                <Tag className='pointer' onClick={()=>{query()}} color='success'  >全部</Tag>
+                <Tag className='pointer' style={{marginBottom:15}}  onClick={()=>{query()}} color='success'  >全部</Tag>
                 {
                     types.map(item=>{
                         let index = parseInt(Math.random()*11)

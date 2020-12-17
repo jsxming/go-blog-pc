@@ -9,10 +9,9 @@ import {setTypes,queryArticles} from '@/redux/actions';
 import {END} from 'redux-saga';
 
 
-import '@/styles/antd.reset.less';
-import '@/styles/reset.less'
-import './../styles/globals.less'
-
+import "../styles/antd.reset.less"
+import "../styles/reset.less"
+import "../styles/globals.less"
 
 function App({ Component, pageProps,initialReduxState }) {
   const initStore = useStore(initialReduxState)

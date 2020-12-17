@@ -33,7 +33,7 @@ export default function SiderLeft() {
                 {
                     types.map(item=>{
                         let index = parseInt(Math.random()*11)
-                        return <Tag className='pointer' color={TAGS_TYPE[index]} key={item.id+100} onClick={()=>{query(item.id)}} >{item.name}</Tag>
+                        return <Tag className='pointer' style={{marginBottom:15}} color={TAGS_TYPE[index]} key={item.id+100} onClick={()=>{query(item.id)}} >{item.name}</Tag>
                     })
                 }
               </div>

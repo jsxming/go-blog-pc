@@ -1,50 +1,45 @@
 import React from 'react';
-import { Provider } from 'react-redux'
-import { useStore } from '@/redux/store'
+import { wrapper,useStore,initializeStore } from '@/redux/store';
+import { Provider } from 'react-redux';
 import { ConfigProvider } from 'antd';
-import zhCN from 'antd/lib/locale/zh_CN'
-import { persistStore } from 'redux-persist'
-import { PersistGate } from 'redux-persist/integration/react'
-
+import zhCN from 'antd/lib/locale/zh_CN';
 import {setRedirect} from '@/api/config';
+import API from "@/api/index";
+import {setTypes,queryArticles} from '@/redux/actions';
+import {END} from 'redux-saga';
+
 
 import '@/styles/antd.reset.less';
 import '@/styles/reset.less'
 import './../styles/globals.less'
 
 
-function App({ Component, pageProps }) {
-  const store = useStore(pageProps.initialState)
-  const persistor = persistStore(store, {}, function () {
-    persistor.persist()
-  })
-  
-
+function App({ Component, pageProps,initialReduxState }) {
+  const initStore = useStore(initialReduxState)
   return (
-    <ConfigProvider locale={zhCN}>
-      <Provider store={store}>
-        <PersistGate  persistor={persistor}>
+      <ConfigProvider locale={zhCN}>
+        <Provider store={initStore} >
           <Component {...pageProps} />
-        </PersistGate>
-      </Provider>
-  </ConfigProvider>
+        </Provider>
+      </ConfigProvider>      
   )
 }
 
 
 App.getInitialProps = async ({ ctx }) => {
+  const reduxStore = initializeStore();
+  const { dispatch } = reduxStore;
   if(!process.browser){
     setRedirect(ctx.res)
   }
-  return {
-    props:{}
-  }
+
+  let typeList = await API.queryTypes()
+  dispatch(setTypes(typeList))
+  dispatch(queryArticles())
+  dispatch(END)
+  await reduxStore.sagaTask.toPromise()
+  return { initialReduxState: reduxStore.getState() }
 }
 
-
-
-
-
-// export default wrapper.withRedux(App)
-export default App
+export default wrapper.withRedux(App)
 

@@ -1,74 +1,73 @@
 import { useMemo } from 'react'
-
 import { applyMiddleware, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import { createWrapper } from 'next-redux-wrapper'
-import { persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 import rootReducer from './reducer/index'
 import rootSaga from './saga/index'
+import { isDev } from '@/config/index';
 
 
 let store;
 
-const exampleInitialState = {
-  token:'',
-  types:[],
-  user:{}
+const initialState = {
+  user: {},
+  types: [],
+  token: "",
 }
 
+
 const bindMiddleware = (middleware) => {
-  if (process.env.NODE_ENV !== 'production') {
-    const { composeWithDevTools } = require('redux-devtools-extension')
+  if (isDev) {
     return composeWithDevTools(applyMiddleware(...middleware))
   }
   return applyMiddleware(...middleware)
 }
 
 
-
-const persistConfig = {
-  key: '962464kill',
-  storage,
-  // whitelist: ['token'], // place to select which state you want to persist
-}
-
-const persistedReducer = persistReducer(persistConfig, rootReducer)
-
-export const makeStore = (initialState = exampleInitialState) => {
-  // wrapper.getServerSideProps wrapper.getStaticProps  使用这两个方法时会把next的context对象传过来
-  const isValid = typeof initialState.res === 'undefined';
+export function initStore(preloadedState = initialState) {
   const sagaMiddleware = createSagaMiddleware()
-  const store = createStore(persistedReducer,isValid ? initialState : undefined , bindMiddleware([sagaMiddleware]))
-
-  store.sagaTask = sagaMiddleware.run(rootSaga)
-
-  return store
+  // 防止 createWrapper 函数传入context对象进来初始化 导致数据错误的问题
+  const isValid = typeof preloadedState.AppTree === 'undefined';
+  let s = createStore(
+    rootReducer,
+    isValid ? preloadedState : undefined,
+    bindMiddleware([sagaMiddleware])
+  )
+  s.sagaTask = sagaMiddleware.run(rootSaga)
+  return s
 }
 
-export const initializeStore = (preloadedState) => {
-  let _store = store ?? makeStore(preloadedState)
-
-  if (preloadedState && store) {
-    _store = makeStore({
-      ...store.getState(),
-      ...preloadedState,
-    })
-    store = undefined
-  }
-
-  if (typeof window === 'undefined') return _store
-  if (!store) store = _store
-  return _store
-}
 
 export function useStore(initialState) {
   const store = useMemo(() => initializeStore(initialState), [initialState])
   return store
 }
 
+export const wrapper = createWrapper(initStore, { debug: false })
 
-export const wrapper = createWrapper(makeStore, { debug: false })
 
+export const initializeStore = (preloadedState) => {
+  let _store = store ?? initStore(preloadedState)
+
+  // After navigating to a page with an initial Redux state, merge that state
+  // with the current state in the store, and create a new store
+  if (preloadedState && store) {
+    _store = initStore({
+      ...store.getState(),
+      ...preloadedState,
+    })
+    // Reset the current store
+    store = undefined
+  }
+
+  // For SSG and SSR always create a new store
+  if (typeof window === 'undefined') return _store
+
+  // Create the store once in the client
+  if (!store) store = _store
+
+  return _store
+}
 

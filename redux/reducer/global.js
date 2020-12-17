@@ -31,7 +31,19 @@ export function types(state=[],action){
     const { type, payload } = action;
     switch (type) {
         case actionTypes.SET_TYPES:
-            return { ...state, ...payload };
+            return payload;
+        default:
+            return state;
+    }
+}
+
+
+export function articles(state=[],action){
+    const { type, payload } = action;
+    switch (type) {
+        case actionTypes.SET_ARTICLE:
+            // console.log('asdf',payload);
+            return payload;
         default:
             return state;
     }
@@ -40,8 +52,10 @@ export function types(state=[],action){
 
 
 
+
 export default {
     token,
     user,
-    types
+    types,
+    articles
 }

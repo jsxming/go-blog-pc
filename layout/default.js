@@ -2,6 +2,14 @@
 import VSider from '@/components/layout/side/index';
 import VHeader from '@/components/layout/vheader/index';
 import Head from 'next/head';
+import { useMemo } from 'react';
+
+export async function getServerSideProps(){
+  console.log('getServerSideProps');
+  return {
+    props:{}
+  }
+}
 
 
 function LayoutDefault({ children, background = '#fafafa' }) {
@@ -15,12 +23,20 @@ function LayoutDefault({ children, background = '#fafafa' }) {
       <VHeader></VHeader>
       <div className='flex_1 w_1200 flex_start align_start'>
           <VSider></VSider>
-          <div className='page_right flex_1' style={{marginLeft:60,backgroundColor:'#fff'}} >
+          <div className='page_right flex_1' style={{marginLeft:60,minHeight:'80vh',backgroundColor:'#fff'}} >
             {children}
           </div>
       </div>
     </div>
   </div>
+}
+
+
+LayoutDefault.getInitialProps = async ()=>{
+  console.log('adfasdfadfa getInitialProps');
+  return {
+    props:{}
+  }
 }
 
 

@@ -6,6 +6,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <script src="/js/less.min.js" ></script>
         </Head>
         <body>
           <Main />

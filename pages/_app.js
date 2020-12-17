@@ -26,6 +26,8 @@ function App({ Component, pageProps,initialReduxState }) {
 }
 
 
+
+
 App.getInitialProps = async ({ ctx }) => {
   const reduxStore = initializeStore();
   const { dispatch } = reduxStore;

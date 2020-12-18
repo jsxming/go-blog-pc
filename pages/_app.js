@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { wrapper,useStore,initializeStore } from '@/redux/store';
 import { Provider } from 'react-redux';
 import { ConfigProvider } from 'antd';
@@ -15,6 +15,9 @@ import "../styles/globals.less"
 
 function App({ Component, pageProps,initialReduxState }) {
   const initStore = useStore(initialReduxState)
+  useEffect(()=>{
+    console.log('hello 你好~我是小明');
+  },[])
   return (
       <ConfigProvider locale={zhCN}>
         <Provider store={initStore} >

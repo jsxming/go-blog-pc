@@ -20,13 +20,13 @@ export default function VHeader(){
                             <span>首页</span>
                         </a>
                     </Link>
-
+{/* 
                     <Link  href='https://www.jsxming.cn/admin/index.html#/login'  >
                         <a target="__blank" className='nav_i flex_start'>
                             <SendOutlined className='h_icon' />
                             <span>登录</span>
                         </a>
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
         </header>

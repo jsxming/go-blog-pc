@@ -7,7 +7,8 @@ const { createProxyMiddleware } = require('http-proxy-middleware')
 const devProxy = {
     '/blog': {
         // target: 'http://yapi.baidu.com/mock/6943/website', // 端口自己配置合适的
-        target: 'http://localhost:9620/blog', // 端口自己配置合适的
+        // target: 'http://localhost:9620/blog', // 端口自己配置合适的
+        target: 'https://www.jsxming.cn/blog', // 端口自己配置合适的
         pathRewrite: {
             '^/blog': '/'
         },

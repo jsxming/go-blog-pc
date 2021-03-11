@@ -22,10 +22,8 @@ export default function ArtDetail({ article }) {
         <LayoutDefault>
             <Head>
                 <title>{article.title}</title>
-                {/* <meta name='keywords' content={article.title} ></meta>
-                <meta name='description' content={article.title} ></meta> */}
             </Head>
-            <div className='article_box'>
+            <div className='article_box' style={{width:800}} >
                 <h1 className='text_center'>{article.title}</h1>
                 <div className='cont' dangerouslySetInnerHTML={{ __html: article.content }}></div>
             </div>

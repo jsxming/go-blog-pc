@@ -26,8 +26,6 @@ function Home() {
                         return <ArticleItem key={item} title={item.title} description={item.description} id={item.id} ></ArticleItem>
                     })
                 }
-
-      
             </div>
         </LayoutDefault>
     );
